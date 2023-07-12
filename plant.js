@@ -10,3 +10,4 @@ async function getPlant(plant) {
     console.log(plantInfo.data.data[0].section);
 }
 getPlant("iris");
+
