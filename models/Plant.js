@@ -6,7 +6,7 @@ const plantSchema = new Schema({
 name: String, 
 description: String
 });
-//collection name = 'plant->plants'
+                                //collection name = 'plant->plants'
 export const Plant = mongoose.model('plant', plantSchema);
 
 

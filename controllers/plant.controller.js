@@ -9,4 +9,8 @@ export const plantSearch = async (req, res) => {
   console.log(Plants);
 };
 
+export const sendPlant = (req,res) =>{
+// req.body.plantSearched
+console.log(req.body);
+};
 
