@@ -12,5 +12,6 @@ export const plantSearch = async (req, res) => {
 export const plantStore = (req,res) =>{
 // req.body.plantSearched
 console.log(req.body);
+res.redirect("/");
 };
 
