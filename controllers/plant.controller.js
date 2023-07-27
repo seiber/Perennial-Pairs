@@ -1,17 +1,24 @@
 import { Plant } from "../models/Plant.js";
+import { getPlant } from "../models/Plant.js";
+
 
 export const plantSearch = async (req, res) => {
   res.render("main", {}); //render html based off the main.ejs file
-  const test = new Plant({ name: "test_name", description: "test_desc" });
-  await test.save();
-  console.log("from Plant.js saved");
-  const Plants = await Plant.find({});
-  console.log(Plants);
+  // const test = new Plant({ name: "test_name", description: "test_desc" });
+  // await test.save();
+  // console.log("from Plant.js saved");
+  // const Plants = await Plant.find({});
+  // console.log(Plants);
 };
 
+
 export const plantStore = (req,res) =>{
-// req.body.plantSearched
-console.log(req.body);
+const plantSearched = req.body.plantEntered;
+getPlant(plantSearched);
 res.redirect("/");
-};
+}
+
+
+
+
 
