@@ -5,19 +5,52 @@ const { Schema } = mongoose;
 
 //designing table/database attributes with a schema
 const plantSchema = new Schema({
-name: String, 
-description: String
+  name: String,
+  waterInfo: String,
+  sunLightInfo: String,
+  pruningInfo: String,
 });
-                                //collection name = 'plant->plants'
-export const Plant = mongoose.model('plant', plantSchema);
+//collection name = 'plant->plants'
+export const Plant = mongoose.model("plant", plantSchema);
 
 const connectionString = process.env.API_CONNECTION;
 export async function getPlant(plant) {
-    console.log(plant);
-  const plantCall = await axios.get(connectionString+`&q=${plant}`,{accept: "application/json"});
-  const plantInfo = plantCall.data.data[0].section;
-  console.log(plantInfo);
+  const plantCall = await axios.get(connectionString + `&q=${plant}`, {
+    accept: "application/json",
+  });
+   // const plantInfo = plantCall.data.data[0].section;
+  const plantInfo =  plantCall.data;
+  return plantInfo;
 }
-// getPlant("tom")
+
+//the functions below are parsing data chuncks retrieved from my getPlant API call
+export async function getWaterInfo(plantInfo)
+{
+  const wateringDescriptionsArray = plantInfo.data.map(plant => {
+    const wateringSection = plant.section.find(section => section.type === "watering");
+    return wateringSection ? wateringSection.description : null;
+  });
+
+  const wateringDescriptionsString = wateringDescriptionsArray.join('\n');
+  return wateringDescriptionsString;
+}
+export async function getSunlightInfo(plantInfo)
+{
+  const sunLightDescriptionsArray = plantInfo.data.map(plant => {
+    const sunLightSection = plant.section.find(section => section.type === "sunlight");
+    return sunLightSection ? sunLightSection.description : null;
+  });
+  const sunLightDescriptionsString = sunLightDescriptionsArray.join('\n');
+  return sunLightDescriptionsString;
+}
+export async function getPruningInfo(plantInfo)
+{
+  const pruningDescriptionsArray = plantInfo.data.map(plant => {
+    const pruningSection = plant.section.find(section => section.type === "pruning");
+    return pruningSection ? pruningSection.description : null;
+  });
+  const pruningDescriptionsString = pruningDescriptionsArray.join('\n');
+  return pruningDescriptionsString;
+}
 
 

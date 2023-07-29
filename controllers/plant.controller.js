@@ -1,5 +1,5 @@
 import { Plant } from "../models/Plant.js";
-import { getPlant } from "../models/Plant.js";
+import { getPlant, getWaterInfo,getSunlightInfo, getPruningInfo } from "../models/Plant.js";
 
 
 export const plantSearch = async (req, res) => {
@@ -12,10 +12,20 @@ export const plantSearch = async (req, res) => {
 };
 
 
-export const plantStore = (req,res) =>{
+export const plantStore = async(req,res) =>{
 const plantSearched = req.body.plantEntered;
-getPlant(plantSearched);
-res.redirect("/");
+const plant = await getPlant(plantSearched);
+const waterInfo = await getWaterInfo(plant);
+const sunLightInfo = await getSunlightInfo(plant);
+const pruningInfo = await getPruningInfo(plant);
+console.log(waterInfo);
+
+//database
+const addPlant = new Plant({ name: plantSearched, waterInfo: waterInfo, sunLightInfo: sunLightInfo, pruningInfo: pruningInfo});
+await addPlant.save();
+const Plants = await Plant.find({}); 
+res.send(Plants);
+// res.redirect("/");
 }
 
 
