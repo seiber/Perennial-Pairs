@@ -14,7 +14,7 @@ export const plantSearch = async (req, res) => {
 
 export const plantStore = async(req,res) =>{
 const plantSearched = req.body.plantEntered;
-const plant = await getPlant(plantSearched);
+const plant = await getPlant(plantSearched); //res.send(plant)
 const waterInfo = await getWaterInfo(plant);
 const sunLightInfo = await getSunlightInfo(plant);
 const pruningInfo = await getPruningInfo(plant);

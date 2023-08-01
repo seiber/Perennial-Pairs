@@ -13,4 +13,4 @@ app.listen(3000,() =>{
     console.log("Express Server started on port 3000");
 });
 
-
+export default app;

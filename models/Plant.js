@@ -30,7 +30,7 @@ export async function getWaterInfo(plantInfo)
     const wateringSection = plant.section.find(section => section.type === "watering");
     return wateringSection ? wateringSection.description : null;
   });
-
+//concatenating array to store as a string in my database waterInfo field
   const wateringDescriptionsString = wateringDescriptionsArray.join('\n');
   return wateringDescriptionsString;
 }
