@@ -17,9 +17,12 @@ const connectionString = process.env.API_CONNECTION;
 export async function getPlant(plant) {
   const plantCall = await axios.get(connectionString + `&q=${plant}`, {
     accept: "application/json",
-  });
+  })
+  .catch((error) => {
+    console.log(error.message);
+  })
    // const plantInfo = plantCall.data.data[0].section;
-  const plantInfo =  plantCall.data;
+  const plantInfo = await plantCall.data;
   return plantInfo;
 }
 

@@ -1,5 +1,5 @@
 import express from "express";
-import { plantSearch, plantStore } from "./controllers/plant.controller.js";
+import { plantSearch, plantStore} from "./controllers/plant.controller.js";
 
 const router = express.Router();
 router.get("/", plantSearch);
