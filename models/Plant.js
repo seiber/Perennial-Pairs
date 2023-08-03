@@ -9,51 +9,55 @@ const plantSchema = new Schema({
   waterInfo: String,
   sunLightInfo: String,
   pruningInfo: String,
+  timesSearched: Number,
 });
 //collection name = 'plant->plants'
 export const Plant = mongoose.model("plant", plantSchema);
 
 const connectionString = process.env.API_CONNECTION;
 export async function getPlant(plant) {
-  const plantCall = await axios.get(connectionString + `&q=${plant}`, {
-    accept: "application/json",
-  })
-  .catch((error) => {
-    console.log(error.message);
-  })
-   // const plantInfo = plantCall.data.data[0].section;
+  const plantCall = await axios
+    .get(connectionString + `&q=${plant}`, {
+      accept: "application/json",
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+  // const plantInfo = plantCall.data.data[0].section;
   const plantInfo = await plantCall.data;
   return plantInfo;
 }
 
 //the functions below are parsing data chuncks retrieved from my getPlant API call
-export async function getWaterInfo(plantInfo)
-{
-  const wateringDescriptionsArray = plantInfo.data.map(plant => {
-    const wateringSection = plant.section.find(section => section.type === "watering");
+export async function getWaterInfo(plantInfo) {
+  const wateringDescriptionsArray = plantInfo.data.map((plant) => {
+    const wateringSection = plant.section.find(
+      (section) => section.type === "watering"
+    );
     return wateringSection ? wateringSection.description : null;
   });
-//concatenating array to store as a string in my database waterInfo field
-  const wateringDescriptionsString = wateringDescriptionsArray.join('\n');
+  //concatenating array to store as a string in my database waterInfo field
+  const wateringDescriptionsString = wateringDescriptionsArray.join("\n");
   return wateringDescriptionsString;
 }
-export async function getSunlightInfo(plantInfo)
-{
-  const sunLightDescriptionsArray = plantInfo.data.map(plant => {
-    const sunLightSection = plant.section.find(section => section.type === "sunlight");
+export async function getSunlightInfo(plantInfo) {
+  const sunLightDescriptionsArray = plantInfo.data.map((plant) => {
+    const sunLightSection = plant.section.find(
+      (section) => section.type === "sunlight"
+    );
     return sunLightSection ? sunLightSection.description : null;
   });
-  const sunLightDescriptionsString = sunLightDescriptionsArray.join('\n');
+  const sunLightDescriptionsString = sunLightDescriptionsArray.join("\n");
   return sunLightDescriptionsString;
 }
-export async function getPruningInfo(plantInfo)
-{
-  const pruningDescriptionsArray = plantInfo.data.map(plant => {
-    const pruningSection = plant.section.find(section => section.type === "pruning");
+export async function getPruningInfo(plantInfo) {
+  const pruningDescriptionsArray = plantInfo.data.map((plant) => {
+    const pruningSection = plant.section.find(
+      (section) => section.type === "pruning"
+    );
     return pruningSection ? pruningSection.description : null;
   });
-  const pruningDescriptionsString = pruningDescriptionsArray.join('\n');
+  const pruningDescriptionsString = pruningDescriptionsArray.join("\n");
   return pruningDescriptionsString;
 }
-
 
