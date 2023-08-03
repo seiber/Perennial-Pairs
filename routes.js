@@ -1,8 +1,9 @@
 import express from "express";
-import { plantSearch, plantStore} from "./controllers/plant.controller.js";
+import { plantSearchPage, plantResultsPage, plantStore} from "./controllers/plant.controller.js";
 
 const router = express.Router();
-router.get("/", plantSearch);
+router.get("/", plantSearchPage);
+router.get("/results", plantResultsPage);
 router.post("/", plantStore);
 
 export default router;
