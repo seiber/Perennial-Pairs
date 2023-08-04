@@ -6,13 +6,14 @@ import session from 'express-session';
 import cookieParser from "cookie-parser";
 
 
-
+const middleWareConnection = process.env.MIDDLEWARE_SECRET
 export const app = express();
 app.use(express.urlencoded({ extended: true })); //middleware for the server to handle multi-part-form-data on POST request and send it to the req.body
+//session middleware
 app.use(cookieParser());
 app.use(
     session({
-      secret: process.env.MIDDLEWARE_SECRET, 
+      secret: middleWareConnection, 
       resave: false,
       saveUninitialized: false,
       cookie: { secure: false }, 

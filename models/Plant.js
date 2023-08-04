@@ -15,6 +15,7 @@ const plantSchema = new Schema({
 export const Plant = mongoose.model("plant", plantSchema);
 
 const connectionString = process.env.API_CONNECTION;
+const connectionString2 = process.env.API2_CONNECTION;
 export async function getPlant(plant) {
   const plantCall = await axios
     .get(connectionString + `&q=${plant}`, {
@@ -25,6 +26,19 @@ export async function getPlant(plant) {
     });
   // const plantInfo = plantCall.data.data[0].section;
   const plantInfo = await plantCall.data;
+  return plantInfo;
+}
+//second API call to get the image_URL
+export async function getPlantImage(plant) {
+  const plantImageCall = await axios
+    .get(connectionString2 + `&q=${plant}`, {
+      accept: "application/json",
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+  const plantInfo = await plantImageCall.data;
+  console.log(plantInfo.id);
   return plantInfo;
 }
 
