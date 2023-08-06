@@ -38,40 +38,16 @@ export async function getPlantImage(plant) {
       console.log(error.message);
     });
   const plantInfo = await plantImageCall.data;
-  console.log(plantInfo.id);
   return plantInfo;
 }
 
 //the functions below are parsing data chuncks retrieved from my getPlant API call
 export async function getWaterInfo(plantInfo) {
-  const wateringDescriptionsArray = plantInfo.data.map((plant) => {
-    const wateringSection = plant.section.find(
-      (section) => section.type === "watering"
-    );
-    return wateringSection ? wateringSection.description : null;
-  });
-  //concatenating array to store as a string in my database waterInfo field
-  const wateringDescriptionsString = wateringDescriptionsArray.join("\n");
-  return wateringDescriptionsString;
+  return plantInfo.data[0].section[0].description;
 }
 export async function getSunlightInfo(plantInfo) {
-  const sunLightDescriptionsArray = plantInfo.data.map((plant) => {
-    const sunLightSection = plant.section.find(
-      (section) => section.type === "sunlight"
-    );
-    return sunLightSection ? sunLightSection.description : null;
-  });
-  const sunLightDescriptionsString = sunLightDescriptionsArray.join("\n");
-  return sunLightDescriptionsString;
+  return plantInfo.data[0].section[1].description;
 }
 export async function getPruningInfo(plantInfo) {
-  const pruningDescriptionsArray = plantInfo.data.map((plant) => {
-    const pruningSection = plant.section.find(
-      (section) => section.type === "pruning"
-    );
-    return pruningSection ? pruningSection.description : null;
-  });
-  const pruningDescriptionsString = pruningDescriptionsArray.join("\n");
-  return pruningDescriptionsString;
+  return plantInfo.data[0].section[2].description;
 }
-
