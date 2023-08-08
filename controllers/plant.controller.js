@@ -16,15 +16,12 @@ export const plantResultsPage = async (req, res) => {
   res.render("results", { plant: plant, image: image });
 };
 export const plantErrorPage = async (req, res) => {
-  const errorPlant = req.session.plantSearched;
-  console.log(errorPlant);
-  res.send(errorPlant);
+  res.render("error");
 };
 
 export const plantStore = async (req, res) => {
   try {
     const plantSearched = req.body.plantEntered;
-    console.log(plantSearched);
     const plantInfo = await getPlant(plantSearched);
     const plantImage = await getPlantImage(plantSearched);
     const waterInfo = await getWaterInfo(plantInfo);
@@ -44,6 +41,8 @@ export const plantStore = async (req, res) => {
         pruningInfo: pruningInfo,
         timesSearched: 1,
       });
+      req.session.plantSearched = plantSearched; 
+      
       await addPlant.save();
     } else {
       let value = plantFound[0].timesSearched;
@@ -56,7 +55,6 @@ export const plantStore = async (req, res) => {
     const updatedPlant = await Plant.find({ name: plantSearched }); //query database to retrieve the new updated value that was cached.
     req.session.updatedPlantData = updatedPlant; //storing data in a session/cookie to access variable after the redirect in my plantResultsPage
     req.session.image = image;
-    req.session.plantSearched = plantSearched;
     res.redirect("/results");
   } catch (error) {
     res.redirect("/error");
