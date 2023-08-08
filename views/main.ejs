@@ -1,75 +1,20 @@
+<%- include('includes/head.ejs') %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:image/png;base64,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" type="image/x-icon">
-    <!-- Bootstrap CSS link -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
-}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"rel="stylesheet" > 
+    <link href="./Stylesheets/main.css" rel="stylesheet"/>
 
-.container {
-    margin-top: 50px;
-}
-
-h1 {
-    text-align: center;
-    color: #228B22; /* Dark green color */
-    margin-bottom: 20px;
-}
-
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-    font-weight: bold;
-    color: #555;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-button[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #228B22;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-button[type="submit"]:hover {
-    background-color: #176617; /* Darker green color on hover */
-}
-    </style>
-    <title>Home</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome to the Plant Care Guides</h1>
-        <form method="post" action="/">
+   <div class="container">
+            <h1>Welcome to the Plant Care Guides</h1>
+            <form method="post" action="/">
             <label for="plantEntered">Enter a plant to search (e.g., 'Tomato', 'European Silver Fir')</label>
             <input type="text" name="plantEntered" id="plantEntered">
             <p class="text-muted">NOTE: Some plant information ('Mango') may be locked behind the Premium API package.</p>
             <button type="submit">Submit</button>
-        </form>
+            </form>
     </div>
-</body>
-</html>
+    
+<%- include('includes/end.ejs') %>
+
+
+
+

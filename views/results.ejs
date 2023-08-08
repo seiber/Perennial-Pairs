@@ -1,77 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('includes/head.ejs') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Care Guides</title>
-    <link rel="icon" href="https://icons-for-free.com/iconfiles/png/512/pear+icon-1320183033953910655.png" type="image/x-icon">
-    <!-- Add Bootstrap CSS link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Add custom CSS for plant-themed styling -->
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e4f1e9;
-        }
+    <link href="./Stylesheets/results.css" rel="stylesheet"/> 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        .container {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #538b59;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        p {
-            line-height: 1.6;
-        }
-
-        strong {
-            color: #538b59;
-        }
-
-        hr {
-            border-color: #d4e3d1;
-            margin: 30px 0;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        /* Plant-themed styles */
-        .plant-bg {
-            background-color: #dff0d8;
-            border-radius: 5px;
-            padding: 10px;
-        }
-
-        .plant-img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .back-to-login a {
-            text-decoration: none;
-            color: #228B22; /* Dark green color */
-            font-weight: bold;
-        }
-    </style>
-</head>
-
-<body>
     <div class="container plant-bg">
         <h1><%=plant[0].name%> care guide</h1>
         <img class="plant-img" src=<%=image%> alt=<%=plant[0].name +'_image_not_found'%>
@@ -82,10 +16,5 @@
         <p><strong>Times Searched: </strong><%=plant[0].timesSearched%></p>
         <p class="back-to-login">Go back to <a href="/">Home</a></p>
     </div>
-    <!-- Add Bootstrap JS and jQuery scripts for Bootstrap functionality -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
 
-</html>
+<%- include('includes/end.ejs') %>

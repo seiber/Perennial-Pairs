@@ -1,0 +1,58 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e4f1e9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #538b59;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+strong {
+    color: #538b59;
+}
+
+hr {
+    border-color: #d4e3d1;
+    margin: 30px 0;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Plant-themed styles */
+.plant-bg {
+    background-color: #dff0d8;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.plant-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.back-to-login a {
+    text-decoration: none;
+    color: #228B22; /* Dark green color */
+    font-weight: bold;
+}
