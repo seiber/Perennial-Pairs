@@ -7,7 +7,8 @@ export const plantSearchPage = async (req, res) => {
 export const plantResultsPage = async (req, res) => {
   const plant = req.session.updatedPlantData;
   const image = req.session.image;
-  res.render("results", { plant: plant, image: image });
+  const suggestedNames = req.session.suggestedNames;
+  res.render("results", { plant: plant, image: image, suggestedNames: suggestedNames });
 };
 export const plantErrorPage = async (req, res) => {
   res.render("error");
@@ -22,7 +23,7 @@ export const plantStore = async (req, res) => {
     const sunLightInfo = await getSunlightInfo(plantInfo);
     const pruningInfo = await getPruningInfo(plantInfo);
     let image = plantImage.data[0].default_image.original_url;
-    console.log(plantInfo);
+    const suggestedNames = plantInfo.data.map(info => info.common_name);//mapping a new array of suggested plant names to display to the user on front-end
     //database
     const plantSearchedUpper = plantSearched.toUpperCase(); // forcing the query params to uppercase to avoid multiple database entries with different case-sens tomato vs tOmaTo
     const plantFound = await Plant.find({ name: plantSearchedUpper });
@@ -49,6 +50,7 @@ export const plantStore = async (req, res) => {
     const updatedPlant = await Plant.find({ name: plantSearchedUpper }); //query database to retrieve the new updated value that was cached.
     req.session.updatedPlantData = updatedPlant; //storing data in a session/cookie to access variable after the redirect in my plantResultsPage
     req.session.image = image;
+    req.session.suggestedNames = suggestedNames;
     res.redirect("/results");
    } catch (error) {
      res.redirect("/error");
