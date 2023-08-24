@@ -23,6 +23,7 @@ export const plantStore = async (req, res) => {
     const sunLightInfo = await getSunlightInfo(plantInfo);
     const pruningInfo = await getPruningInfo(plantInfo);
     let image = plantImage.data[0].default_image.original_url;
+    console.log(plantInfo);
     const suggestedNames = plantInfo.data.map(info => info.common_name);//mapping a new array of suggested plant names to display to the user on front-end
     //database
     const plantSearchedUpper = plantSearched.toUpperCase(); // forcing the query params to uppercase to avoid multiple database entries with different case-sens tomato vs tOmaTo
